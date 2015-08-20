@@ -1,2 +1,2 @@
-# docker-redis-consul
-Official redis docker with consul
+# docker-rethinkdb-consul
+RethinkDB with Consul
