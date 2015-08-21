@@ -1,2 +1,2 @@
 #!/bin/sh
-exec redis /etc/redis.conf
+exec redis-server /etc/redis.conf
