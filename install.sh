@@ -13,13 +13,10 @@ chmod +x /bin/consul
 rm /tmp/consul.zip
 apt-get remove -y unzip
 rm -rf /var/lib/apt/lists/*
-mv /install/consul /etc/service/consul
-mkdir /consul
-mkdir /consul-data
+cp -R /install/consul/* /
 
 # install redis
-mv /install/redis /etc/service
-touch /etc/redis.conf
+cp -R /install/redis/* /
 
 # install init.sh
 mv /install/init.sh /sbin/initsh
