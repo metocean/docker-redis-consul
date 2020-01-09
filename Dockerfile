@@ -1,10 +1,11 @@
-FROM redis as builder
+FROM redis:5-buster as builder
 
-RUN apt-get update
-RUN apt-get install -y curl unzip make gcc
+RUN apt-get update &&\
+    apt-get install -y curl unzip make gcc &&\
+    apt-get purge -y --auto-remove
 
 # install consul agent
-ENV CONSUL_VERSION=1.0.7
+ENV CONSUL_VERSION=1.6.2
 RUN cd /tmp &&\
     curl -o consul.zip -L https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip &&\
     unzip consul.zip &&\
@@ -21,7 +22,7 @@ RUN echo "----------------- install consul-init -----------------" &&\
     make &&\
     cp consul-init /usr/bin/
 
-FROM redis
+FROM redis:5-buster
 COPY --from=builder /usr/bin/consul /usr/bin/
 COPY --from=builder /usr/bin/consul-init /usr/bin/
 RUN mkdir -p /consul/data
